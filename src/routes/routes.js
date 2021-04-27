@@ -1,9 +1,11 @@
 const express = require("express")
 const router = express.Router()
-const marcaController = require('../controllers/index')
+const loginController = require("../controllers/login")
+const cocheController = require('../controllers/index')
 
 
-router.post("/marca",marcaController.saveMarca)
+router.post("/login",loginController.getlogin)
+router.post("/coche",cocheController.saveCoche)
 // router.get("/marcas",marcaController.getMarcas)
 // router.get("/marca/:id",marcaController.getMarca)
 // router.put("/marca/:id",marcaController.updateMarca)

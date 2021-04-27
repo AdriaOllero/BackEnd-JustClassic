@@ -1,13 +1,13 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const MarcaSchema = new Schema({
+const CocheSchema = new Schema({
 name: String,
 type: String,
 savedAt: { type: Date, default: Date.now },
 updatedAt: { type: Date, default: Date.now }
 })
 
-const MarcaModel = mongoose.model("marca", MarcaSchema)
+const CocheModel = mongoose.model("coche", CocheSchema)
 
-module.exports = MarcaModel
+module.exports = CocheModel

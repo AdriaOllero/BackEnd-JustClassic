@@ -1,10 +1,10 @@
 const controller = {}
-const Marca = require("../models/marca")
+const coche = require("../models/coche")
 
 
-controller.saveMarca = async (req, res) => {
+controller.saveCoche = async (req, res) => {
     let imagen = req.body.imagen
-    let logo = req.body.logo
+    let marca = req.body.marca
     let modelo = req.body.modelo
     let combustible = req.body.combustible
     let kilometros = req.body.kilometros
@@ -13,10 +13,10 @@ controller.saveMarca = async (req, res) => {
     let precio = req.body.precio
     let localidad = req.body.localidad
     let description = req.body.description
-    if (imagen && logo && modelo && combustible && kilometros && año && color && precio && localidad && description) {
+    if (imagen && marca && modelo && combustible && kilometros && año && color && precio && localidad && description) {
         try {
-            const marca = new Marca({ imagen: imagen, logo: logo, modelo: modelo, combustible: combustible, kilometros: kilometros, año: año, color: color,  precio: precio, localidad: localidad, description: description})
-            await marca.save()
+            const coche = new Marca({ imagen: imagen, marca: marca, modelo: modelo, combustible: combustible, kilometros: kilometros, año: año, color: color,  precio: precio, localidad: localidad, description: description})
+            await coche.save()
             res.status(204).send()
         } catch (err) {
             res.status(500).send(err)
