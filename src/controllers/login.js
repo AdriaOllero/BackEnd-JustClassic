@@ -2,7 +2,7 @@ const controller ={}
 
 const users = [
 
-  {email:"parrelgp5@widmore.com",password:"pass123"},
+  {email:"parrelgp5@widmore.com",password:"Ah6828aha"},
   
   {email:"email@prueba.com",password:"pass123"},
   
@@ -14,7 +14,7 @@ const users = [
       
         let correo = req.body.email
         let contrasena = req.body.password
-        console.log(correo +"  "+contrasena)
+        console.log(correo +"  "+ contrasena)
 
        
 
@@ -22,6 +22,7 @@ const users = [
             let user = users.find((user) => user.email == req.body.email)
              if(user && user.password == req.body.password){
                res.send("OK") 
+               console.log(res)
                 
              }else{
                 res.send("Error de Autentificación")
