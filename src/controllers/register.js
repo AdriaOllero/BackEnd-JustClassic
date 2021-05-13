@@ -1,15 +1,5 @@
 const controller ={}
 
-const users = [
-
-  {nombre:"", email:"parrelgp5@widmore.com",password:"pass123"},
-  
-  {email:"email@prueba.com",password:"pass123"},
-  
-  {email:"fullstack@pro.com",password:"pass123"}
-  
-  ]
-
     controller.getlogin = (req, res)=>{
       
         let correo = req.body.email

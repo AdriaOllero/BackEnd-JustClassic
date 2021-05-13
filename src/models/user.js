@@ -5,10 +5,17 @@ const SchemaMongo = mongoose.Schema
 const Schema = new SchemaMongo({
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true },
-})
+    name: { type: String, require: true },
+    surname: { type: String, require: true },
+    role: {
+        type: String,
+        enum: ['user', 'company'],
+        default: 'user', require: true
+    },
+    cv: String,
+}, { versionKey: false })
 
-
-Schema.pre('save', async function(next) {
+Schema.pre('save', async function (next) {
     try {
         const user = this
         const hash = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10))
@@ -19,9 +26,9 @@ Schema.pre('save', async function(next) {
     }
 })
 
-Schema.methods.isValidPassword = async function(password) {
+Schema.methods.isValidPassword = async function (password) {
     const compare = await bcrypt.compare(password, this.password)
     return compare
 }
 
-module.exports = mongoose.model("users", Schema)
+module.exports = mongoose.model("user", Schema)
