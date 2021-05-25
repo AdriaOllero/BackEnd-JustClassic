@@ -5,8 +5,7 @@ const schema = Joi.object({
     email: Joi.string()
         .email().required(),
     name: Joi.string().min(2).required(),
-    surname: Joi.string().min(2).required(),
-    role: Joi.string().required().valid('company', 'user')
+    phone: Joi.string().min(2).required(),
 })
 
 //schema anterior con las validaciones
@@ -16,11 +15,8 @@ function validate(body) {
         email: body.email,
         password: body.password,
         name: body.name,
-        surname: body.surname,
-        role: body.role
+        phone: body.phone,
     }, { abortEarly: false })
 }
 
-module.exports = {
-    validate
-}
+module.exports = {validate}

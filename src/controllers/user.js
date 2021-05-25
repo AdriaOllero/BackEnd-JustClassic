@@ -30,10 +30,11 @@ controller.login = async (req, res) => {
       }
 
       const dataToken = authJWT.createToken(user)
-
+      console.log("Login Succesfully");
       return res.send({
           access_token: dataToken[0],
           expires_in: dataToken[1]
+          
       })
 
   } catch (err) {
@@ -41,39 +42,60 @@ controller.login = async (req, res) => {
       res.status(500).send("Error")
   }
 }
+
 controller.signup = async (req, res) => {
-    const email = req.body.email
-    const password = req.body.password
-    const name = req.body.name
-    const surname = req.body.surname
-    const role = req.body.role
-
-
-    const validation = userValidator.validate(req.body)
-
+    const email = req.body.email;
+    const password = req.body.password;
+    const name = req.body.name;
+    const phone = req.body.phone;
+  
+    const validation = userValidator.validate(req.body);
+  
     if (validation.error) {
-        const error = validation.error.details[0].message
-        console.log(validation.error)
-        res.status(400).send(error)
-        return
+      const error = validation.error.details[0].message;
+      console.log(validation.error);
+      res.status(400).send(error);
+      return;
     }
-
+  
     try {
-        const exists = await User.findOne({ email: email })
-        if (exists) {
-            console.log("usuario ya existe")
-            res.status(400).send("usuario ya existe")
-            return
-        }
-        const user = new User({ email: email, password: password, name: name, surname: surname, role: role })
-        await user.save()
-        const data = await User.findOne({ email: email })
-        res.send({ status: "ok", data: data })
+      const exists = await User.findOne({ email: email });
+      if (exists) {
+        console.log("usuario ya existe");
+        res.status(400).send("usuario ya existe");
+        return;
+      }
+      const user = new User({
+        email: email,
+        password: password,
+        name: name,
+        phone: phone,
+      });
+      await user.save();
+      const data = await User.findOne({ email: email });
+      res.send({ status: "ok", data: data });
+      console.log(user);
     } catch (err) {
-        console.log(err)
-        res.status(500).send("Error")
+      console.log(err);
+      res.status(500).send("Error");
     }
-}
+  };
+  controller.position = (req, res) => {
+    const position = req.query.position;
+    console.log("position");
+  
+    if (position === "" || isNaN(position) || position < 1) {
+      res.send("<p style='color: red;'>Introduce una posición válida</p>");
+      return;
+    }
+    let user =
+      position <= users.length ? users[position - 1] : users[users.length - 1];
+    res.send(
+      "<p> Has seleccionado el usuario: <span style='color: #1bd;'>" +
+        user.email +
+        "</span></p>"
+    );
+  };
 
 controller.getUserJobs = async (req, res) => {
     const user = req.user

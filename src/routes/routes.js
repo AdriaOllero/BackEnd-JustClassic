@@ -1,19 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const loginController = require("../controllers/login")
-const registerController = require("../controllers/register")
-// router.post("/login", loginController.signup)
-// router.post("/login", loginController.login)
-// router.get("/login", passport.auth, loginController.userDetail)
-router.post("register", registerController.getlogin)
-router.post("/login", loginController.login)
+const userController = require("../controllers/user")
+const carController = require("../controllers/car")
 
-// router.post("/login",loginController.getlogin)
-// router.post("/coche",cocheController.saveCoche)
-// router.get("/marcas",marcaController.getMarcas)
-// router.get("/marca/:id",marcaController.getMarca)
-// router.put("/marca/:id",marcaController.updateMarca)
-// router.delete("/marca/:id",marcaController.deleteMarca)
+router.post("/registerUser", userController.signup)
+router.post("/login", userController.login)
+router.post("/car", carController.saveCar)
+
+
 
 
 module.exports = router

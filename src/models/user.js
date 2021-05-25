@@ -6,12 +6,7 @@ const Schema = new SchemaMongo({
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true },
     name: { type: String, require: true },
-    surname: { type: String, require: true },
-    role: {
-        type: String,
-        enum: ['user', 'company'],
-        default: 'user', require: true
-    },
+    phone: { type: String, require: true },
     cv: String,
 }, { versionKey: false })
 

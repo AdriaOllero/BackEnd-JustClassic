@@ -60,7 +60,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500)
 
     if (err.status == 404) {
-        res.sendFile(path.join(__dirname, './public/welcome.html'))
+        res.sendFile(path.join(__dirname, './public'))
     } else {
         res.json({
             status: err.status,
