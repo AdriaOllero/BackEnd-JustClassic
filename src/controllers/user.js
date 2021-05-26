@@ -31,10 +31,17 @@ controller.login = async (req, res) => {
 
       const dataToken = authJWT.createToken(user)
       console.log("Login Succesfully");
+      console.log(user._id)
+      console.log(user.name)
+      console.log(user.email)
+      console.log(user.phone)
       return res.send({
           access_token: dataToken[0],
-          expires_in: dataToken[1]
-          
+          expires_in: dataToken[1],
+          id: user._id,
+          userName: user.name,
+          userEmail: user.email,
+          userPhone: user.phone
       })
 
   } catch (err) {
