@@ -38,9 +38,9 @@ controller.saveCar = async (req, res) => {
 };
 controller.getCar = async (req, res) => {
   const id = req.params.id;
-
   try {
     const car = await Car.findById(id);
+    console.log(car)
     res.json(car);
   } catch (err) {
     console.log(err);
