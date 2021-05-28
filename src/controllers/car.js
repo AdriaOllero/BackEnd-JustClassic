@@ -40,7 +40,7 @@ controller.getCar = async (req, res) => {
   const id = req.params.id;
   try {
     const car = await Car.findById(id);
-    console.log(car)
+    console.log(car);
     res.json(car);
   } catch (err) {
     console.log(err);
@@ -58,56 +58,72 @@ controller.getCars = async (req, res) => {
   }
 };
 
+// controller.updateCar = async (req, res) => {
+//   const validation = carValidator.validate(req.body);
+// const name = req.body.name
+//   if (validation.error) {
+//     const error = validation.error.details[0].message;
+//     console.log(validation.error);
+//     res.status(400).send(error);
+//     return;
+//   }
+//   try {
+//     await Car.findByIdAndUpdate(req.params.id, {
+//       name: req.body.name,
+//       bio: req.body.bio,
+//       // year: req.body.year,
+//       // photo: req.body.photo,
+//       // km: req.body.km,
+//       // model: req.body.model,
+//       // brand: req.body.brand,
+//       // fuel: req.body.fuel,
+//       // doors: req.body.doors,
+//       // seats: req.body.seats,
+//       // location: req.body.location,
+//       // price: req.body.price,
+//     });
+//     res.status(201).send();
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send(err);
+//   }
+// };
+
+
 controller.updateCar = async (req, res) => {
-  const validation = carValidator.validate(req.body);
-
-  if (validation.error) {
-    const error = validation.error.details[0].message;
-    console.log(validation.error);
-    res.status(400).send(error);
-    return;
-  }
-
+  const id = req.params.id;
+  const name = req.body.name;
+  const bio = req.body.bio;
   try {
-    await Car.findByIdAndUpdate(req.params.id, {
-      name: req.body.name,
-      bio: req.body.bio,
-      year: req.body.year,
-      photo: req.body.photo,
-      km: req.body.km,
-      model: req.body.model,
-      brand: req.body.brand,
-      fuel: req.body.fuel,
-      doors: req.body.doors,
-      seats: req.body.seats,
-      location: req.body.location,
-      price: req.body.price,
+    console.log(id);
+    console.log(name);
+    console.log(bio);
+    await Car.findByIdAndUpdate(id, {
+      name: name,
+      bio: bio,
+      updatedAt: Date.now(),
     });
-    res.status(201).send();
+    res.status(204).send(car);
   } catch (err) {
-    console.log(err);
     res.status(500).send(err);
   }
 };
 
+
+
+
 controller.deleteCar = async (req, res) => {
   const id = req.params.id;
-  const user = req.user;
   try {
-    const car = await Car.findById(id);
-    if (String(car.name) === String(user.id)) {
-      const dcar = await Car.findByIdAndDelete(id);
-      res.json(dcar);
-    } else {
-      res
-        .status(403)
-        .send({ error: "No estas autorizado a borrar esta oferta" });
-    }
+    const dcar = await Car.findByIdAndDelete(id);
+    console.log(id);
+    res.json(dcar);
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: "El trabajo no existe" });
   }
 };
+
 // controller.getCarsQuery = async (req, res) => {
 //   try {
 //     const search = req.query.search;

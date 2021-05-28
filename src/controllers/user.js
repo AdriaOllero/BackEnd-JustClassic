@@ -58,6 +58,22 @@ controller.getUser = async (req, res) => {
   }
 };
 
+controller.updateUser = async (req, res) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  try {
+    console.log(id);
+    console.log(name);
+    await User.findByIdAndUpdate(id, {
+      name: name,
+      updatedAt: Date.now(),
+    });
+    res.status(204).send(user);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
 controller.signup = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
